@@ -10,7 +10,7 @@ class SService(object):
         "daemon_reload",
         "disable",
         "enable",
-        "is_installed"
+        "is_installed",
         "is_active",
         "reload",
         "restart",
