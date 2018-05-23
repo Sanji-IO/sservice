@@ -47,8 +47,7 @@ class SService(object):
                         "--no-page",
                         "is-active",
                         self.name,
-                        _bg=bg,
-                        _piped=True)
+                        _bg=bg)
                     return True
                 except ErrorReturnCode:
                     return False
