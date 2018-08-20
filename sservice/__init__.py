@@ -72,7 +72,7 @@ class SService(object):
             except ErrorReturnCode as e:
                 self.logger.debug(
                     "SService '%s' %s failed" %
-                    (self.service, command))
+                    (self.name, command))
                 self.logger.debug(str(e))
                 return e.exit_code
 
