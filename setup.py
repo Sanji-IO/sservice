@@ -10,7 +10,7 @@ def read(*paths):
 
 setuptools.setup(
     name="sservice",
-    version="0.1.2",
+    version="0.1.3",
     author="Sanji Team",
     author_email="sanji@moxa.com",
     description="Systemd Service Wrapper",
