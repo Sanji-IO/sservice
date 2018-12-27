@@ -53,7 +53,7 @@ class SService(object):
                     return False
             return is_active
         elif command in ["daemon_reload"]:
-            args = []
+            args = ["daemon-reload"]
         elif command in [
                 "disable", "enable", "reload", "restart",
                 "start", "status", "stop"]:
