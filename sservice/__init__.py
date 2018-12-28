@@ -22,6 +22,8 @@ class SService(object):
     def __init__(self, name):
         self.name = name
         self.logger = logging.getLogger("sservice.%s" % (name))
+        self._instance = None
+        self._with_service_name = True
 
     def __getattr__(self, command):
         if command not in self.COMMANDS:
@@ -53,16 +55,25 @@ class SService(object):
                     return False
             return is_active
         elif command in ["daemon_reload"]:
-            args = []
+            self._with_service_name = False
+            args = ["daemon-reload"]
         elif command in [
                 "disable", "enable", "reload", "restart",
                 "start", "status", "stop"]:
+            self._with_service_name = True
             args = [
                 "--no-page",
-                command,
-                "{}.service".format(self.name)]
+                command]
 
-        def do_command(bg=False):
+        def do_command(bg=False, instance=None):
+            if instance:
+                self._instance = instance
+            _name = "{}".format(self.name)
+            if self._instance:
+                _name = _name + self._instance
+            if self._with_service_name:
+                args.append(_name)
+
             try:
                 output = sh.systemctl(
                     args, _bg=bg, _no_out=True)
